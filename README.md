@@ -1,4 +1,3 @@
-````markdown
 # Food-Nexus: Sentiment Analysis of Food Waste Conversations with Food Balance Data
 
 ## Overview
@@ -15,7 +14,6 @@ This project is containerized using Docker, deployed on Kubernetes with Helm cha
 ```bash
 git clone https://github.com/AnkurMangroliya/Food-Nexus.git
 cd Food-Nexus
-````
 
 2. **(Optional) Create and activate a Python virtual environment**
 
