@@ -1,79 +1,48 @@
-
-
----
-
 ````markdown
 # Food-Nexus: Sentiment Analysis of Food Waste Conversations with Food Balance Data
 
 ## Overview
+Food-Nexus is a Django-based web application that analyzes sentiment in conversations around food waste and hunger. It uses real food balance data from different countries to provide insights and visualizations about global food sustainability issues.
 
-**Food-Nexus** is a Django-based web application designed to analyze sentiment in conversations around food waste and hunger. It leverages actual food balance data from various countries and integrates data visualization and machine learning techniques to raise awareness of food sustainability issues.
-
-The application is containerized using Docker, deployed via Kubernetes with Helm charts, and continuously delivered through ArgoCD following GitOps best practices.
-
----
-
-## Features
-
-- 🔍 Sentiment analysis API using natural language processing
-- 📊 Visualizations via Power BI (embedded or linked)
-- 🐳 Dockerized for easy deployment
-- ☸️ Kubernetes-ready with Helm charts
-- 🚀 ArgoCD GitOps deployment support
+This project is containerized using Docker, deployed on Kubernetes with Helm charts, and uses ArgoCD for GitOps-style continuous deployment.
 
 ---
 
-## Prerequisites
+## Local Setup Instructions
 
-Before getting started, make sure you have the following installed:
-
-- [Docker](https://www.docker.com/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [Minikube](https://minikube.sigs.k8s.io/docs/) or access to any Kubernetes cluster
-- [Helm](https://helm.sh/)
-- [ArgoCD](https://argo-cd.readthedocs.io/)
-- [Git](https://git-scm.com/)
-
----
-
-## Local Development Setup
-
-### 1. Clone the Repository
+1. **Clone the repository**
 
 ```bash
 git clone https://github.com/AnkurMangroliya/Food-Nexus.git
 cd Food-Nexus
 ````
 
-### 2. Set Up Python Virtual Environment (Optional but Recommended)
+2. **(Optional) Create and activate a Python virtual environment**
 
 ```bash
 python3 -m venv my_env
-source my_env/bin/activate  # Linux/macOS
+source my_env/bin/activate    # Linux/macOS
 # On Windows PowerShell:
 # .\my_env\Scripts\Activate.ps1
 ```
 
-### 3. Install Dependencies
+3. **Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run Migrations and Start the Server
+4. **Run migrations and start the Django server**
 
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
-### 5. Access the Application
+5. **Access the application**
 
-Open your browser and navigate to:
-
-```
-http://localhost:8000
-```
+Open your browser and go to:
+`http://localhost:8000`
 
 ---
 
@@ -91,7 +60,8 @@ docker build -t <your-dockerhub-username>/food-nexus:latest .
 docker run -p 8000:8000 <your-dockerhub-username>/food-nexus:latest
 ```
 
-Visit the app at `http://localhost:8000`
+Visit the app at:
+`http://localhost:8000`
 
 ### 3. Push Docker Image to Docker Hub
 
@@ -136,10 +106,7 @@ kubectl port-forward svc/food-nexus-service 8080:8000
 ```
 
 Open in browser:
-
-```
-http://localhost:8080
-```
+`http://localhost:8080`
 
 ---
 
@@ -149,7 +116,7 @@ To ensure Kubernetes can monitor pod health, implement these probes.
 
 ### 1. Add Health Check View in Django
 
-In `urls.py` or a dedicated views file:
+In your Django app's `views.py` or a dedicated views file:
 
 ```python
 from django.http import JsonResponse
@@ -158,15 +125,21 @@ def health_check(request):
     return JsonResponse({'status': 'ok'})
 ```
 
-Add to your URL patterns:
+Add to your URL patterns in `urls.py`:
 
 ```python
-path('healthz/', health_check, name='healthz'),
+from django.urls import path
+from .views import health_check
+
+urlpatterns = [
+    # ... other url patterns ...
+    path('healthz/', health_check, name='healthz'),
+]
 ```
 
 ### 2. Configure Probes in Helm Chart Deployment YAML
 
-Example snippet:
+Add the following snippet under your container spec:
 
 ```yaml
 livenessProbe:
@@ -212,10 +185,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 Open the UI in your browser:
-
-```
-https://localhost:8080
-```
+`https://localhost:8080`
 
 Login with username `admin` and the retrieved password.
 
@@ -276,3 +246,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgements
 
 Special thanks to the University of Windsor for their support and guidance throughout this project.
+
+```
+```
