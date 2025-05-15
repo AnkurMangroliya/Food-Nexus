@@ -70,6 +70,10 @@ document_vectorizer = joblib.load(DOCUMENT_VECTORIZER_PATH)
 aspect_vectorizer = joblib.load(ASPECT_VECTORIZER_PATH)
 sentence_vectorizer = joblib.load(SENTENCE_VECTORIZER_PATH)
 
+
+def health_check(request):
+    return JsonResponse({'status': 'ok'})
+
 def preprocess_text(text):
     """Preprocess the text."""
     processed_text = text.lower()  # Convert text to lowercase
