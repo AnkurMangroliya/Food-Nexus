@@ -1,7 +1,3 @@
-Got it! Here's a **complete, single `README.md` file** that includes everything — project overview, local setup, Docker build, Helm deployment, Kubernetes instructions, and ArgoCD setup — all in one place and ready for GitHub. You can copy-paste it directly.
-
----
-
 ````markdown
 # Food-Nexus: Sentiment Analysis of Food Waste Conversations with Food Balance Data
 
@@ -276,10 +272,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgements
 
 Special thanks to the University of Windsor for their support and guidance throughout this project.
-
-```
-
----
-
-If you want me to generate a ready-to-use `Dockerfile` or Helm chart templates, just ask!
-```
